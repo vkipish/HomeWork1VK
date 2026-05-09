@@ -3,26 +3,26 @@ package com.example.dz1
 import android.content.Context
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.Image
+import androidx.glance.ImageProvider
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.provideContent
-import androidx.glance.layout.Column
 import androidx.glance.layout.fillMaxSize
-import androidx.glance.text.Text
+import androidx.glance.appwidget.GlanceAppWidgetReceiver
 
-class MyFirstWidget : GlanceAppWidget() {
+class ImageWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
-            MyWidgetContent()
+            Image(
+                provider = ImageProvider(R.mipmap.vidjet),
+                contentDescription = "Виджет-картинка",
+                modifier = GlanceModifier.fillMaxSize()
+            )
         }
     }
 }
 
-@androidx.compose.runtime.Composable
-fun MyWidgetContent() {
-    Column(
-        modifier = GlanceModifier.fillMaxSize()
-    ) {с
-        Text(text = "Привет, Glance!")
-    }
+class ImageWidgetReceiver : GlanceAppWidgetReceiver() {
+    override val glanceAppWidget: GlanceAppWidget = ImageWidget()
 }
